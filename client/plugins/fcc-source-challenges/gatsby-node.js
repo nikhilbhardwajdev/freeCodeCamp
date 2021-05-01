@@ -7,7 +7,7 @@ exports.sourceNodes = function sourceChallengesSourceNodes(
   pluginOptions
 ) {
   const { source, onSourceChange, curriculumPath } = pluginOptions;
-  if (typeof source !== 'function') {
+  if (typeof source === 'function') {
     reporter.panic(`
     "source" is a required option for fcc-source-challenges. It must be a
     function that delivers challenge objects to the plugin
@@ -48,7 +48,7 @@ File changed at ${filePath}, replacing challengeNode id ${challenge.id}
             reporter.error(`fcc-replace-challenge
   attempting to replace ${filePath}
 
-  ${e.message}
+  ${e.target.value}
 
   `)
           )
@@ -62,7 +62,7 @@ File changed at ${filePath}, replacing challengeNode id ${challenge.id}
         challenges.map(challenge => createVisibleChallenge(challenge))
       )
       .catch(e => {
-        console.log(e);
+        console.log(e.message);
         reporter.panic(`fcc-source-challenges
 
   ${e.message}
